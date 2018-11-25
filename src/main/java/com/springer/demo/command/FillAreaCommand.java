@@ -2,6 +2,10 @@ package com.springer.demo.command;
 
 import com.springer.demo.canvas.Canvas;
 
+
+/**
+ * Command that handles filling area with color on canvas
+ */
 public class FillAreaCommand implements DrawCommand{
 
     private Canvas canvas;

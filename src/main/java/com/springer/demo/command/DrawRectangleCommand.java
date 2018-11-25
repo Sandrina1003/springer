@@ -2,6 +2,10 @@ package com.springer.demo.command;
 
 import com.springer.demo.canvas.Canvas;
 
+
+/**
+ * Command that handles drawing rectangle on canvas
+ */
 public class DrawRectangleCommand implements DrawCommand {
 
     private Canvas canvas;

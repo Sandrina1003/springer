@@ -12,11 +12,8 @@ public class ValidatorServiceTest {
 
     @Test(expected = InvalidCommandException.class)
     public void shouldThrowInvalidCommandExceptionWhenCanvasIsNotInitialized() {
-        //given
-        char[][] canvas = null;
-
         //when
-        validatorService.validateCanvasIsInitialized(canvas);
+        validatorService.validateCanvasIsInitialized(null);
 
         //then
         //should throw InvalidCommandException
@@ -75,11 +72,66 @@ public class ValidatorServiceTest {
 
     @Test(expected = InvalidCommandException.class)
     public void shouldThrowInvalidCommandExceptionWhenInputIsNull(){
+        //when
+        validatorService.validateInput(null);
+
+        //then
+        //should throw InvalidCommandException
+    }
+
+    @Test(expected = InvalidCommandException.class)
+    public void shouldThrowInvalidCommandExceptionWhenXCoordinateIsNotInCanvas(){
         //given
-        String input = null;
+        char canvasMatrix[][]={{'-', '-', '-', '-', '-'},
+                {'|', ' ', ' ', ' ', '|'},
+                {'|', ' ', ' ', ' ', '|'},
+                {'|', ' ', ' ', ' ', '|'},
+                {'-', '-', '-', '-', '-'}};
 
         //when
-        validatorService.validateInput(input);
+        validatorService.validateCoordinateInCanvas(canvasMatrix, 4, 2);
+
+        //then
+        //should throw InvalidCommandException
+    }
+
+    @Test(expected = InvalidCommandException.class)
+    public void shouldThrowInvalidCommandExceptionWhenYCoordinateIsNotInCanvas(){
+        //given
+        char canvasMatrix[][]={{'-', '-', '-', '-', '-'},
+                {'|', ' ', ' ', ' ', '|'},
+                {'|', ' ', ' ', ' ', '|'},
+                {'|', ' ', ' ', ' ', '|'},
+                {'-', '-', '-', '-', '-'}};
+
+        //when
+        validatorService.validateCoordinateInCanvas(canvasMatrix, 2, 0);
+
+        //then
+        //should throw InvalidCommandException
+    }
+
+    @Test(expected = InvalidCommandException.class)
+    public void shouldThrowInvalidCommandExceptionWhenOnInitializeCanvasWhenCanvasWidthIsLessThenZero(){
+        //given
+        int canvasWidth = -1;
+        int canvasHeight = 5;
+
+        //when
+        validatorService.validateCanvasSize(canvasWidth, canvasHeight);
+
+        //then
+        //should throw InvalidCommandException
+    }
+
+    @Test(expected = InvalidCommandException.class)
+    public void shouldThrowInvalidCommandExceptionWhenOnInitializeCanvasWhenCanvasHeightIsLessThenZero(){
+        //given
+        int canvasWidth = 3;
+        int canvasHeight = -5;
+
+        //when
+        validatorService.validateCanvasSize(canvasWidth, canvasHeight);
 
         //then
         //should throw InvalidCommandException

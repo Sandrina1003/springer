@@ -2,6 +2,9 @@ package com.springer.demo.command;
 
 import com.springer.demo.canvas.Canvas;
 
+/**
+ * Command that handles drawing line on canvas
+ */
 public class DrawLineCommand implements DrawCommand {
 
     private Canvas canvas;

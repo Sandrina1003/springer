@@ -7,10 +7,20 @@ import com.springer.demo.service.ValidatorService;
 
 import java.util.Arrays;
 
+/**
+ * Factory for creating command corresponding on user input
+ */
 public class CommandFactory {
 
     private ValidatorService validatorService = new ValidatorService();
 
+    /**
+     * Creates command depending on user input
+     *
+     * @param canvas - canvas
+     * @param input  - user input
+     * @return - corresponding command
+     */
     public DrawCommand createCommand(Canvas canvas, String input) {
         validatorService.validateInput(input);
         String[] parameters = Arrays.stream(input.split(" "))

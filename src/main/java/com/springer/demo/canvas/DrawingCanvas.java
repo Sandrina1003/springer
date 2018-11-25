@@ -9,11 +9,11 @@ public class DrawingCanvas implements Canvas {
 
     private char[][] canvasMatrix = null;
 
-    public char[][] getCanvasMatrix() {
+    char[][] getCanvasMatrix() {
         return canvasMatrix;
     }
 
-    public void setCanvasMatrix(char[][] canvasMatrix) {
+    void setCanvasMatrix(char[][] canvasMatrix) {
         this.canvasMatrix = canvasMatrix;
     }
 
@@ -22,6 +22,7 @@ public class DrawingCanvas implements Canvas {
 
     @Override
     public void init(int width, int height) {
+        validatorService.validateCanvasSize(width, height);
         width = width + 2;
         height = height + 2;
         canvasMatrix = new char[height][width];
@@ -43,8 +44,10 @@ public class DrawingCanvas implements Canvas {
 
     @Override
     public void drawLine(int x1, int y1, int x2, int y2) {
-        validatorService.validateLineParameters(x1, y1, x2, y2);
         validatorService.validateCanvasIsInitialized(canvasMatrix);
+        validatorService.validateCoordinateInCanvas(canvasMatrix, x1, y1);
+        validatorService.validateCoordinateInCanvas(canvasMatrix, x2, y2);
+        validatorService.validateLineParameters(x1, y1, x2, y2);
 
         if (y1 == y2) {
             drawLine.drawHorizontalLine(canvasMatrix, x1, y1, x2);
@@ -57,7 +60,8 @@ public class DrawingCanvas implements Canvas {
     @Override
     public void drawRectangle(int x1, int y1, int x2, int y2) {
         validatorService.validateCanvasIsInitialized(canvasMatrix);
-
+        validatorService.validateCoordinateInCanvas(canvasMatrix, x1, y1);
+        validatorService.validateCoordinateInCanvas(canvasMatrix, x2, y2);
         for (int i = x1; i <= x2; i++) {
             canvasMatrix[y1][i] = 'x';
             canvasMatrix[y2][i] = 'x';
@@ -70,24 +74,27 @@ public class DrawingCanvas implements Canvas {
     }
 
     @Override
-    public void fillArea(int x1, int y1, char color) {
+    public void fillArea(int x, int y, char color) {
+        validatorService.validateCanvasIsInitialized(canvasMatrix);
+        validatorService.validateCoordinateInCanvas(canvasMatrix, x, y);
+
         ArrayDeque<int[]> toCheck = new ArrayDeque<>();
         int canvasWidth = canvasMatrix[0].length - 2;
         int canvasHeight = canvasMatrix.length - 2;
-        if (canvasMatrix[y1][x1] != ' ') {
+        if (canvasMatrix[y][x] != ' ') {
             return;
         }
 
-        canvasMatrix[y1][x1] = color;
-        int[] coordinate = {x1, y1};
+        canvasMatrix[y][x] = color;
+        int[] coordinate = {x, y};
         toCheck.add(coordinate);
 
         while (!toCheck.isEmpty()) {
             int[] currentPosition = toCheck.remove();
-            int x = currentPosition[0];
-            int y = currentPosition[1];
-            for (int i = x - 1; i <= x + 1; i++) {
-                for (int j = y - 1; j <= y + 1; j++) {
+            int currentX = currentPosition[0];
+            int currentY = currentPosition[1];
+            for (int i = currentX - 1; i <= currentX + 1; i++) {
+                for (int j = currentY - 1; j <= currentY + 1; j++) {
                     if (i > 0 && i <= canvasWidth && j > 0 && j <= canvasHeight && canvasMatrix[j][i] == ' ') {
                         canvasMatrix[j][i] = color;
                         int[] coordinate1 = {i, j};
@@ -106,9 +113,10 @@ public class DrawingCanvas implements Canvas {
 
     @Override
     public void printCanvas() {
-        for (int i = 0; i < canvasMatrix.length; i++) {
-            for (int j = 0; j < canvasMatrix[i].length; j++) {
-                System.out.print(canvasMatrix[i][j]);
+        validatorService.validateCanvasIsInitialized(canvasMatrix);
+        for (char[] aCanvasMatrix : canvasMatrix) {
+            for (char anACanvasMatrix : aCanvasMatrix) {
+                System.out.print(anACanvasMatrix);
             }
             System.out.println();
         }

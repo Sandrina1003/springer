@@ -2,6 +2,10 @@ package com.springer.demo.command;
 
 import com.springer.demo.canvas.Canvas;
 
+
+/**
+ * Command that handles canvas initialization
+ */
 public class InitializeCanvasCommand implements DrawCommand {
 
     private Canvas canvas;

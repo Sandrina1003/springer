@@ -1,5 +1,8 @@
 package com.springer.demo.draw;
 
+/**
+ * Handles drawing of horizontal and vertical lines on canvas
+ */
 public interface DrawLineInterface {
 
     default void drawHorizontalLine(char[][] canvas, int x1, int y1, int x2) {

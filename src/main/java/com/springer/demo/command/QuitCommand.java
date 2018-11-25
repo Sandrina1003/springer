@@ -2,6 +2,10 @@ package com.springer.demo.command;
 
 import com.springer.demo.canvas.Canvas;
 
+
+/**
+ * Command that quits the application
+ */
 public class QuitCommand implements DrawCommand {
 
     private Canvas canvas;

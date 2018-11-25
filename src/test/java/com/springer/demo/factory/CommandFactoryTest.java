@@ -3,11 +3,8 @@ package com.springer.demo.factory;
 import com.springer.demo.canvas.DrawingCanvas;
 import com.springer.demo.command.*;
 import com.springer.demo.exeption.InvalidCommandException;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
