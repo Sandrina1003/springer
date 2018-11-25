@@ -1,17 +1,25 @@
 package com.springer.demo.command;
 
-import com.springer.demo.canvas.CanvasInterface;
+import com.springer.demo.canvas.Canvas;
 
 public class QuitCommand implements DrawCommand {
 
-    private CanvasInterface canvas;
+    private Canvas canvas;
 
-    public QuitCommand(CanvasInterface canvas) {
+    public QuitCommand(Canvas canvas) {
         this.canvas = canvas;
     }
 
     @Override
     public void execute() {
         canvas.quit();
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
+    }
+
+    public void setCanvas(Canvas canvas) {
+        this.canvas = canvas;
     }
 }

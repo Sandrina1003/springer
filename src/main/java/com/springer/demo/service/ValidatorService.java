@@ -12,7 +12,7 @@ public class ValidatorService {
 
     public void validateCanvasIsInitialized(char[][] canvas) {
         if (canvas == null) {
-            throw new InvalidCommandException("Canvas should be initialized first");
+            throw new InvalidCommandException("DrawingCanvas should be initialized first");
         }
     }
 

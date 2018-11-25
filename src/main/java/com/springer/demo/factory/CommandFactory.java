@@ -1,6 +1,6 @@
 package com.springer.demo.factory;
 
-import com.springer.demo.canvas.CanvasInterface;
+import com.springer.demo.canvas.Canvas;
 import com.springer.demo.command.*;
 import com.springer.demo.exeption.InvalidCommandException;
 import com.springer.demo.service.ValidatorService;
@@ -11,7 +11,7 @@ public class CommandFactory {
 
     private ValidatorService validatorService = new ValidatorService();
 
-    public DrawCommand createCommand(CanvasInterface canvas, String input) {
+    public DrawCommand createCommand(Canvas canvas, String input) {
         validatorService.validateInput(input);
         String[] parameters = Arrays.stream(input.split(" "))
                 .map(String::trim)

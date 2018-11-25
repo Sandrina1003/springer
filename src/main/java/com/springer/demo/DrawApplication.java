@@ -1,7 +1,7 @@
 package com.springer.demo;
 
+import com.springer.demo.canvas.DrawingCanvas;
 import com.springer.demo.canvas.Canvas;
-import com.springer.demo.canvas.CanvasInterface;
 import com.springer.demo.command.DrawCommand;
 import com.springer.demo.factory.CommandFactory;
 
@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class DrawApplication {
 
     public static void main(String[] args) {
-        CanvasInterface canvas = new Canvas();
+        Canvas canvas = new DrawingCanvas();
         CommandFactory commandFactory = new CommandFactory();
         Scanner input = new Scanner(System.in);
 

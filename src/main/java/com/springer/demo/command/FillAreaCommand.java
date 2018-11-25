@@ -1,23 +1,55 @@
 package com.springer.demo.command;
 
-import com.springer.demo.canvas.CanvasInterface;
+import com.springer.demo.canvas.Canvas;
 
 public class FillAreaCommand implements DrawCommand{
 
-    private CanvasInterface canvas;
-    private int x1;
-    private int y1;
+    private Canvas canvas;
+    private int x;
+    private int y;
     private char color;
 
-    public FillAreaCommand(CanvasInterface canvas, int x1, int y1, char color) {
+    public FillAreaCommand(Canvas canvas, int x, int y, char color) {
         this.canvas = canvas;
-        this.x1 = x1;
-        this.y1 = y1;
+        this.x = x;
+        this.y = y;
         this.color=color;
     }
 
     @Override
     public void execute() {
-        canvas.fillArea(x1, y1, color);
+        canvas.fillArea(x, y, color);
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
+    }
+
+    public void setCanvas(Canvas canvas) {
+        this.canvas = canvas;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public char getColor() {
+        return color;
+    }
+
+    public void setColor(char color) {
+        this.color = color;
     }
 }
