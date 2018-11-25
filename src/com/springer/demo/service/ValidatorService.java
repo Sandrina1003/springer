@@ -17,8 +17,14 @@ public class ValidatorService {
     }
 
     public void validateParametersSize(String[] parameters, int size) {
-        if (parameters.length!=size) {
+        if (parameters.length != size) {
             throw new InvalidCommandException("Invalid parameters size");
+        }
+    }
+
+    public void validateInput(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            throw new InvalidCommandException("Command not valid");
         }
     }
 }
