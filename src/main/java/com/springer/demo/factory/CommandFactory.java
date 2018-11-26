@@ -32,7 +32,6 @@ public class CommandFactory {
             case 'C': {
                 validatorService.validateParametersSize(parameters, 3);
                 return new InitializeCanvasCommand(canvas,
-
                         getParameterValue(parameters[1]),
                         getParameterValue(parameters[2]));
             }
