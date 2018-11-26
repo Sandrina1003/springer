@@ -16,7 +16,6 @@ public class ValidatorService {
     public void validateCanvasSize(int width, int height) {
         if (width <= 0 || height <= 0) {
             throw new InvalidCommandException("Invalid canvas size");
-
         }
     }
 

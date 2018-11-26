@@ -7,7 +7,7 @@ In order to build the project you need the standard installation of maven(3.6.0)
 Steps to work with the application
 1. Checkout the application
 2. Build with maven (mvn clean install)
-3. Run the application (java -jar drawapplication/target/drawapplication-1.0-SNAPSHOT.jar)
+3. Run the application (java -cp drawapplication-1.0-SNAPSHOT.jar com.springer.demo.DrawApplication)
 
 
 #Design

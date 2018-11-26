@@ -79,9 +79,10 @@ public class DrawingCanvas implements Canvas {
         validatorService.validateCoordinateInCanvas(canvasMatrix, x, y);
 
         ArrayDeque<int[]> toCheck = new ArrayDeque<>();
+        char hitColor = canvasMatrix[y][x];
         int canvasWidth = canvasMatrix[0].length - 2;
         int canvasHeight = canvasMatrix.length - 2;
-        if (canvasMatrix[y][x] != ' ') {
+        if (hitColor == color) {
             return;
         }
 
@@ -95,7 +96,7 @@ public class DrawingCanvas implements Canvas {
             int currentY = currentPosition[1];
             for (int i = currentX - 1; i <= currentX + 1; i++) {
                 for (int j = currentY - 1; j <= currentY + 1; j++) {
-                    if (i > 0 && i <= canvasWidth && j > 0 && j <= canvasHeight && canvasMatrix[j][i] == ' ') {
+                    if (i > 0 && i <= canvasWidth && j > 0 && j <= canvasHeight && canvasMatrix[j][i] == hitColor) {
                         canvasMatrix[j][i] = color;
                         int[] coordinate1 = {i, j};
                         toCheck.add(coordinate1);
@@ -113,12 +114,13 @@ public class DrawingCanvas implements Canvas {
 
     @Override
     public void printCanvas() {
-        validatorService.validateCanvasIsInitialized(canvasMatrix);
-        for (char[] aCanvasMatrix : canvasMatrix) {
-            for (char anACanvasMatrix : aCanvasMatrix) {
-                System.out.print(anACanvasMatrix);
+        if (canvasMatrix != null) {
+            for (char[] aCanvasMatrix : canvasMatrix) {
+                for (char anACanvasMatrix : aCanvasMatrix) {
+                    System.out.print(anACanvasMatrix);
+                }
+                System.out.println();
             }
-            System.out.println();
         }
     }
 }

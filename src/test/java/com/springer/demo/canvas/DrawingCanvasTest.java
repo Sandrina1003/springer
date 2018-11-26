@@ -243,13 +243,45 @@ public class DrawingCanvasTest {
     }
 
     @Test
-    public void shouldReturnSameCanvasWhenFillAreaHitsX() {
+    public void shouldFillAreaWithAnotherColorWhenAreaIsAlreadyFilledWithOneColor() {
+        //given
+        char[][] initialMatrix = {{'-', '-', '-', '-', '-'},
+            {'|', ' ', 'x', 'c', '|'},
+            {'|', ' ', 'x', 'c', '|'},
+            {'|', ' ', 'x', 'x', '|'},
+            {'-', '-', '-', '-', '-'}
+        };
+        char[][] expectedMatrix = {{'-', '-', '-', '-', '-'},
+            {'|', ' ', 'x', 'o', '|'},
+            {'|', ' ', 'x', 'o', '|'},
+            {'|', ' ', 'x', 'x', '|'},
+            {'-', '-', '-', '-', '-'}
+        };
+
+        //when
+        canvas.setCanvasMatrix(initialMatrix);
+
+        //then
+        canvas.fillArea(3, 2, 'o');
+
+        char[][] canvasMatrix = canvas.getCanvasMatrix();
+        verifyCreatedMatrix(expectedMatrix, canvasMatrix);
+    }
+
+    @Test
+    public void shouldReturnLineInColorWhenFillAreaHitsLine() {
         //given
         char[][] initialMatrix = {{'-', '-', '-', '-', '-'},
                 {'|', ' ', 'x', ' ', '|'},
                 {'|', ' ', 'x', ' ', '|'},
                 {'|', ' ', 'x', 'x', '|'},
                 {'-', '-', '-', '-', '-'}
+        };
+        char[][] expectedMatrix = {{'-', '-', '-', '-', '-'},
+            {'|', ' ', 'c', ' ', '|'},
+            {'|', ' ', 'c', ' ', '|'},
+            {'|', ' ', 'c', 'c', '|'},
+            {'-', '-', '-', '-', '-'}
         };
 
         //when
@@ -259,7 +291,7 @@ public class DrawingCanvasTest {
         canvas.fillArea(2, 2, 'c');
 
         char[][] canvasMatrix = canvas.getCanvasMatrix();
-        verifyCreatedMatrix(initialMatrix, canvasMatrix);
+        verifyCreatedMatrix(expectedMatrix, canvasMatrix);
     }
 
     @Test(expected = InvalidCommandException.class)
