@@ -76,7 +76,7 @@ public class ValidatorService {
      * @param y      - coordinate y
      */
     public void validateCoordinateInCanvas(char[][] canvas, int x, int y) {
-        if ((x < 1 || x >= canvas.length - 1) || (y <= 0 || y >= canvas[0].length - 1)) {
+        if ((x < 1 || x >= canvas[0].length - 1) || (y <= 0 || y >= canvas.length - 1)) {
             throw new InvalidCommandException(
                     String.format("Coordinate {%s,%s} is not in the canvas", x, y));
         }

@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.junit.Assert.fail;
+
 @RunWith(MockitoJUnitRunner.class)
 public class ValidatorServiceTest {
 
@@ -82,17 +84,37 @@ public class ValidatorServiceTest {
     @Test(expected = InvalidCommandException.class)
     public void shouldThrowInvalidCommandExceptionWhenXCoordinateIsNotInCanvas(){
         //given
-        char canvasMatrix[][]={{'-', '-', '-', '-', '-'},
-                {'|', ' ', ' ', ' ', '|'},
-                {'|', ' ', ' ', ' ', '|'},
-                {'|', ' ', ' ', ' ', '|'},
-                {'-', '-', '-', '-', '-'}};
+        char canvasMatrix[][]={{'-', '-', '-', '-', '-', '-'},
+                {'|', ' ', ' ', ' ', ' ', '|'},
+                {'|', ' ', ' ', ' ', ' ', '|'},
+                {'|', ' ', ' ', ' ', ' ', '|'},
+                {'-', '-', '-', '-', ' ', '-'}};
 
         //when
-        validatorService.validateCoordinateInCanvas(canvasMatrix, 4, 2);
+        validatorService.validateCoordinateInCanvas(canvasMatrix, 13, 2);
 
         //then
         //should throw InvalidCommandException
+    }
+
+    @Test
+    public void shouldReturnWhenCoordinatesAreInCanvas(){
+        //given
+        char canvasMatrix[][]={{'-', '-', '-', '-', '-', '-'},
+                {'|', ' ', ' ', ' ', ' ', '|'},
+                {'|', ' ', ' ', ' ', ' ', '|'},
+                {'|', ' ', ' ', ' ', ' ', '|'},
+                {'-', '-', '-', '-', ' ', '-'}};
+
+        //when
+        try{
+            validatorService.validateCoordinateInCanvas(canvasMatrix, 4, 3);
+
+        }
+        //then should not throw exception
+        catch(Exception e){
+            fail("Should not have thrown any exception");
+        }
     }
 
     @Test(expected = InvalidCommandException.class)
