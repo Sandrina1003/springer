@@ -31,24 +31,26 @@ public class CommandFactory {
         switch (operation) {
             case 'C': {
                 validatorService.validateParametersSize(parameters, 3);
-                return new InitializeCanvasCommand(canvas, Integer.valueOf(parameters[1]),
-                        Integer.valueOf(parameters[2]));
+                return new InitializeCanvasCommand(canvas,
+
+                        getParameterValue(parameters[1]),
+                        getParameterValue(parameters[2]));
             }
             case 'L': {
                 validatorService.validateParametersSize(parameters, 5);
 
-                return new DrawLineCommand(canvas, Integer.valueOf(parameters[1]),
-                        Integer.valueOf(parameters[2]), Integer.valueOf(parameters[3]),
-                        Integer.valueOf(parameters[4]));
+                return new DrawLineCommand(canvas, getParameterValue(parameters[1]),
+                        getParameterValue(parameters[2]), getParameterValue(parameters[3]),
+                        getParameterValue(parameters[4]));
             }
             case 'R': {
                 validatorService.validateParametersSize(parameters, 5);
-                return new DrawRectangleCommand(canvas, Integer.valueOf(parameters[1]), Integer.valueOf(parameters[2]),
-                        Integer.valueOf(parameters[3]), Integer.valueOf(parameters[4]));
+                return new DrawRectangleCommand(canvas, getParameterValue(parameters[1]), getParameterValue(parameters[2]),
+                        getParameterValue(parameters[3]), getParameterValue(parameters[4]));
             }
             case 'B': {
                 validatorService.validateParametersSize(parameters, 4);
-                return new FillAreaCommand(canvas, Integer.valueOf(parameters[1]), Integer.valueOf(parameters[2]),
+                return new FillAreaCommand(canvas, getParameterValue(parameters[1]), getParameterValue(parameters[2]),
                         parameters[3].charAt(0));
             }
             case 'Q': {
@@ -59,6 +61,14 @@ public class CommandFactory {
             default:
                 throw new InvalidCommandException("Command not valid");
 
+        }
+    }
+
+    private Integer getParameterValue(String parameter) {
+        try {
+            return Integer.valueOf(parameter);
+        } catch (NumberFormatException ex) {
+            throw new InvalidCommandException(String.format("Invalid parameter format %s", parameter));
         }
     }
 }

@@ -115,4 +115,17 @@ public class CommandFactoryTest {
         //then
         //InvalidCommandException is expected
     }
+
+    @Test(expected = InvalidCommandException.class)
+    public void shouldThrowInvalidCommandExceptionWhenSomeOfTheParametersHasInvalidFormat() {
+        //given
+        DrawingCanvas drawingCanvas = new DrawingCanvas();
+        String input = "C 20 x";
+
+        //when
+        commandFactory.createCommand(drawingCanvas, input);
+
+        //then
+        //InvalidCommandException is expected
+    }
 }
